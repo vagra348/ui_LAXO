@@ -1,6 +1,6 @@
 package helpers;
 
-public class TestData {
+public class Config {
 
     public static final String domen_input_link = "https://laxo.one/signin/";
     public static final String domen_value = "loadtest";

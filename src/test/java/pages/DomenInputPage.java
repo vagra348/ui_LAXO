@@ -1,25 +1,19 @@
 package pages;
 
 import core.BaseSeleniumPage;
-import helpers.TestData;
+import helpers.Config;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class DomenInputPage extends BaseSeleniumPage {
-    @FindBy(name="user_domain")
-    private WebElement domen_input_field;
+    private By domen_input_field_By = By.name("user_domain");
 
     public DomenInputPage (){
-        driver.get(TestData.domen_input_link);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        driver.get(Config.domen_input_link);
     }
 
     public AuthPage input_domen_name(String domen_name){
-        wait.until(ExpectedConditions.visibilityOf(domen_input_field)).sendKeys(domen_name, Keys.ENTER);
+        driver.findElement(domen_input_field_By).sendKeys(domen_name, Keys.ENTER);
         return new AuthPage();
     }
 }

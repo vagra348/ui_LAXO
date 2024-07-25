@@ -1,6 +1,6 @@
 package core;
 
-import helpers.TestData;
+import helpers.Config;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,8 +34,8 @@ abstract public class BaseSeleniumTest {
     @BeforeEach
     public void domen_and_login(){
         mainOrdersPage = new DomenInputPage()
-                .input_domen_name(TestData.domen_value)
-                .authentification(TestData.login, TestData.password);
+                .input_domen_name(Config.domen_value)
+                .authentification(Config.login, Config.password);
     }
     @AfterEach
     public void tear_down(){

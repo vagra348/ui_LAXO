@@ -1,30 +1,25 @@
 package pages.OrdersPages;
 
 import core.BaseSeleniumPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AddOrderPage extends BaseSeleniumPage {
-    @FindBy(id="text-0-0")
-    private WebElement input_name_field;
-    @FindBy(xpath = "//*[.='Сохранить']")
-    private WebElement save_btn;
-    @FindBy(xpath = "//input[@placeholder='Выбрать...']")
-    private WebElement select_contact_list;
-    @FindBy(xpath = "//div[@class='select-dropdown-static']/child::div[2]")
-    private WebElement select_contact;
+
+    private By input_name_field_By = By.id("text-0-0");
+    private By save_btn_By = By.xpath("//*[.='Сохранить']");
+    private By select_contact_list_By = By.xpath("//input[@placeholder='Выбрать...']");
+    private By select_contact_By = By.xpath("//div[@class='select-dropdown-static']/child::div[2]");
+
     public AddOrderPage(){
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
     public OrderCardPage add_new_order (String new_order_name){
-        wait.until(ExpectedConditions.elementToBeClickable(input_name_field)).sendKeys(new_order_name);
-        wait.until(ExpectedConditions.elementToBeClickable(select_contact_list)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(select_contact)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(save_btn)).click();
+        driver.findElement(input_name_field_By).sendKeys(new_order_name);
+        driver.findElement(select_contact_list_By).click();
+        driver.findElement(select_contact_By).click();
+        driver.findElement(save_btn_By).click();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Редактировать']"))));
         return new OrderCardPage();
     }
 }

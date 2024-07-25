@@ -2,50 +2,38 @@ package pages.OrdersPages;
 
 import core.BaseSeleniumPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.By;
 
 public class OrderCardPage extends BaseSeleniumPage {
-    @FindBy(xpath = "//div[@data-field_id='order_name']/child::div")
-    private WebElement order_name_field;
-    @FindBy(xpath = "//span[text()='Редактировать']")
-    private WebElement edit_btn;
-    @FindBy(xpath = "//button[@class='field-open']/child::span[@class='text']")
-    private WebElement status_name;
-    @FindBy(xpath = "//div[@class='additional-menu-icon']")
-    private WebElement add_menu_btn;
-    @FindBy(xpath = "//span[text()='Удалить']")
-    private WebElement delete_btn;
-    @FindBy(xpath = "//span[text()='Да']")
-    private WebElement yes_btn;
-    @FindBy(xpath = "//span[text()='Назад']")
-    private WebElement go_back_btn;
+    private By order_name_field_By = By.xpath("//div[@data-field_id='order_name']/child::div");
+    private By edit_btn_By = By.xpath("//span[text()='Редактировать']");
+    private By status_name_By = By.xpath("//button[@class='field-open']/child::span[@class='text']");
+    private By add_menu_btn_By = By.xpath("//div[@class='additional-menu-icon']");
+    private By delete_btn_By = By.xpath("//span[text()='Удалить']");
+    private By yes_btn_By = By.xpath("//span[text()='Да']");
+    private By go_back_btn_By = By.xpath("//span[text()='Назад']");
 
     public OrderCardPage(){
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
     public String get_order_card_URL(){
-        wait.until(ExpectedConditions.elementToBeClickable(edit_btn));
         return driver.getCurrentUrl();
     }
     public String get_order_card_name(){
-        wait.until(ExpectedConditions.elementToBeClickable(edit_btn));
-        return order_name_field.getText();
+        WebElement e = driver.findElement(order_name_field_By);
+        return e.getText();
     }
     public EditOrderCardPage edit_order(){
-        wait.until(ExpectedConditions.elementToBeClickable(edit_btn)).click();
+        driver.findElement(edit_btn_By).click();
         return new EditOrderCardPage();
     }
     public MainOrdersPage delete_order(){
-        wait.until(ExpectedConditions.elementToBeClickable(add_menu_btn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(delete_btn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(yes_btn)).click();
+        driver.findElement(add_menu_btn_By).click();
+        driver.findElement(delete_btn_By).click();
+        driver.findElement(yes_btn_By).click();
         return new MainOrdersPage();
     }
     public MainOrdersPage go_back_to_main_o_page(){
-        wait.until(ExpectedConditions.elementToBeClickable(go_back_btn)).click();
+        driver.findElement(go_back_btn_By).click();
         return new MainOrdersPage();
     }
 }
